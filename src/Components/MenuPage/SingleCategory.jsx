@@ -1,30 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "./SingleCategory.module.css";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addCartRequest, addCartSuccess, addCartFailure } from '../../Redux/actionCreator';
 import axios from 'axios';
 import { BsBag } from "react-icons/bs";
 import { useToast } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
 
 const SingleCategory = ({ id, image, name, category, price, desc, weight }) => {
     const [hovered, setHovered] = useState(false);
     const dispatch = useDispatch();
     const toast = useToast();
+    const [data, setData] = useState([]);
 
-    const data = useSelector((store) => {
+    /* const { cat } = useParams();
+    console.log(cat) */
+
+    useEffect(()=>{
+        axios.get('http://localhost:8000/items', { headers : {
+            "Authorization" : `Bearer ${localStorage.getItem("token")}` 
+        }})
+        .then((res)=>{
+            console.log(res.data);
+            setData(res.data);
+        })
+    }, [])
+
+    /* const data = useSelector((store) => {
         return store.reducer.data;
-    })
+    }) */
 
-    const handleClick = (id) => {
-        console.log(id);
+    const handleClick = (name) => {
+        console.log(name);
         //post request
-        console.log(data);
         let cartItem = data.filter((e, i) => {
-            return i === id - 1;
+            return e.name === name;
         })
         console.log(cartItem);
         dispatch(addCartRequest());
-        axios.post('http://localhost:8000/items/cart', cartItem[0])
+        axios.post('http://localhost:8000/items/cart', cartItem[0], { headers : {
+            "Authorization" : `Bearer ${localStorage.getItem("token")}` 
+        }})
             .then((res) => {
                 console.log(res);
                 dispatch(addCartSuccess(res.data))
@@ -70,7 +86,7 @@ const SingleCategory = ({ id, image, name, category, price, desc, weight }) => {
                     <h4 style={{ padding: "5px", textDecoration: "line-through" }}>{(price * 1.05).toFixed(2)}</h4>
                     <h3 style={{ color: 'green', padding: "5px" }}><b>5% off</b></h3>
                 </div>
-                <button onClick={() => handleClick(id)}
+                <button onClick={() => handleClick(name)}
                     style={{
                         backgroundColor: "yellow",
                         borderRadius: "10px",
@@ -100,7 +116,7 @@ const SingleCategory = ({ id, image, name, category, price, desc, weight }) => {
                 <h4 style={{ fontSize: 20, fontFamily: 'cursive', margin: "auto", height: "20%", marginTop: "50px" }}>{name}</h4><hr />
                 <p style={{ fontSize: 18, fontFamily: 'cursive', margin: "auto", height: "20%", marginTop: "25px", marginBottom: "25px" }}>{desc}</p><hr />
                 <h4 style={{ fontSize: 20, fontFamily: 'cursive', margin: "auto", height: "20%", marginTop: "50px" }}>{weight}</h4>
-                <button onClick={() => handleClick(id)}
+                <button onClick={() => handleClick(name)}
                     style={{
                         backgroundColor: "yellow",
                         borderRadius: "10px",

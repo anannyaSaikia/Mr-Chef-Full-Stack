@@ -49,37 +49,49 @@ const YourOrder = () => {
         // })
         // console.log(cartProduct, "cart product")
         const handleRemoveItem = (id) => {
-                axios.delete(`http://localhost:8000/items/cart/${id}`)
-                // dispatch(addCartRequest())
-                .then(()=>{
-                        axios.get("http://localhost:8000/items/cart")
-                .then((res)=>{
-                        setCartProduct(res.data)
-                        // console.log(res.data.data)
-                        // dispatch(addCartSuccess(res.data))
-                }).catch((err) => {
-                        // dispatch(addCartFailure())
+                axios.delete(`http://localhost:8000/items/cart/${id}`, {
+                        headers: {
+                                "Authorization": `Bearer ${localStorage.getItem("token")}`
+                        }
                 })
-                })
+                        // dispatch(addCartRequest())
+                        .then(() => {
+                                axios.get("http://localhost:8000/items/cart", {
+                                        headers: {
+                                                "Authorization": `Bearer ${localStorage.getItem("token")}`
+                                        }
+                                })
+                                        .then((res) => {
+                                                setCartProduct(res.data)
+                                                // console.log(res.data.data)
+                                                // dispatch(addCartSuccess(res.data))
+                                        }).catch((err) => {
+                                                // dispatch(addCartFailure())
+                                        })
+                        })
                 // const updatedOrders = cartProduct.filter((order) => order.id !== id);
                 // setCartProduct(updatedOrders);
         };
 
-        useEffect(()=>{
+        useEffect(() => {
                 // dispatch(addCartRequest())
-                axios.get("http://localhost:8000/items/cart")
-                .then((res)=>{
-                        setCartProduct(res.data)
-                }).catch((err) => {
-                        console.log(err);
-                        // dispatch(addCartFailure())
+                axios.get("http://localhost:8000/items/cart", {
+                        headers: {
+                                "Authorization": `Bearer ${localStorage.getItem("token")}`
+                        }
                 })
-        },[])
+                        .then((res) => {
+                                setCartProduct(res.data)
+                        }).catch((err) => {
+                                console.log(err);
+                                // dispatch(addCartFailure())
+                        })
+        }, [])
 
 
         return (
                 <Flex w="100vw" h="100vh" justify="center" align="center" bg="#011029">
-                        <Box  w={isLargerThan ? '500px' : '100%'} p={4} borderWidth={1} borderRadius="lg" bg="white">
+                        <Box w={isLargerThan ? '500px' : '100%'} p={4} borderWidth={1} borderRadius="lg" bg="white">
 
                                 <VStack spacing={4} align="stretch">
                                         <Text fontSize="2xl" fontWeight="bold">
@@ -108,7 +120,7 @@ const YourOrder = () => {
                                                                                 size="sm"
                                                                                 colorScheme="yellow"
                                                                                 borderRadius="full"
-                                                                                onClick={() => handleQuantityChange(order.id, 'increase')}
+                                                                                onClick={() => handleQuantityChange(order._id, 'increase')}
                                                                         >
                                                                                 +
                                                                         </Button>
@@ -118,7 +130,7 @@ const YourOrder = () => {
                                                                                 colorScheme="gray"
                                                                                 backgroundColor='gray.300'
                                                                                 borderRadius="full"
-                                                                                onClick={() => handleQuantityChange(order.id, 'decrease')}
+                                                                                onClick={() => handleQuantityChange(order._id, 'decrease')}
                                                                         >
                                                                                 -
                                                                         </Button>
@@ -126,7 +138,7 @@ const YourOrder = () => {
                                                                                 size="xs"
                                                                                 colorScheme="red"
                                                                                 borderRadius="full"
-                                                                                onClick={() => handleRemoveItem(order.id)}
+                                                                                onClick={() => handleRemoveItem(order._id)}
                                                                         >
                                                                                 <CloseIcon />
                                                                         </Button>
@@ -152,7 +164,7 @@ const YourOrder = () => {
                                                 color='black'
                                                 borderColor="yellow.500"
                                                 _hover={{ bg: 'yellow.500', color: 'white' }}
-                                                onClick={()=>navigate("/checkout")}
+                                                onClick={() => navigate("/items/checkout")}
                                         >
                                                 Checkout
                                         </Button>

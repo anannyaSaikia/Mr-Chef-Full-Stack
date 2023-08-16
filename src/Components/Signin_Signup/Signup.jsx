@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   Tabs,
+  Text,
   /* TabList, */
   TabPanels,
   /* Tab, */
@@ -26,10 +27,10 @@ import React from "react";
 import background from "./images/bg2.jpg";
 /* import Signin from "./Signin"; */
 import { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+/* import ReCAPTCHA from "react-google-recaptcha"; */
 import Loader from "./Loader";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux"
 import { /* postUserSuccess, */ postUserFaliure } from "../../Redux/loginRedux/loginActionCreater";
@@ -37,6 +38,7 @@ import { /* postUserSuccess, */ postUserFaliure } from "../../Redux/loginRedux/l
 
 function Signup(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [inputFocus, setInputFocus] = useState({
     field1: false,
     field2: false,
@@ -46,7 +48,7 @@ function Signup(props) {
   const toast = useToast()
 
   const [show, setShow] = useState(false);
-  const [captcha, setcaptcha] = useState(false);
+ /*  const [captcha, setcaptcha] = useState(false); */
   const [loader, setloader] = useState(false);
 
   const [isChecked, setisChecked] = useState(false);
@@ -58,10 +60,10 @@ function Signup(props) {
 
   const handleClick = () => setShow(!show);
 
-  const onChange = () => {
+  /* const onChange = () => {
     // captcha
     setcaptcha(!captcha);
-  };
+  }; */
 
   const handleInputFocus = (fieldName) => {
     setInputFocus((prevState) => ({
@@ -162,7 +164,10 @@ function Signup(props) {
 
       axios.get("http://localhost:8000/")
         .then((res) => {
-          const user = res.data.find((data) => data.mobile === mobile);
+          console.log(res)
+
+          const user = res.data.data.find((data) => data.mobile === mobile);
+          /* const user = res.data.find((data) => data.mobile === mobile); */
           if (!user) {
             axios.post("http://localhost:8000/signup", userDataObj)
               .then((res) => {
@@ -178,7 +183,7 @@ function Signup(props) {
                 setTimeout(() => {
                   setloader(false);
                 }, 2000);
-                // navigate("/signin");
+                navigate("/login");
               })
               .catch((err) => {
                 dispatch(postUserFaliure())
@@ -359,17 +364,19 @@ function Signup(props) {
                           </span>
                         </p>
                       </Center>
-                      <Center>
-                        {/* google captcha */}
+
+                      {/* <Center>
+                        
                         <ReCAPTCHA
                           sitekey="6LdecqQlAAAAAF5O-JC8ProsSC_nHykNvfTpWp2B"
                           onChange={onChange}
                         />
-                      </Center>
+                      </Center> */}
+
                       <Center py={"20px"}>
                         {
                           // handleLoader
-                          isChecked && captcha ? <Button onClick={handleSubmit} colorScheme="orange">
+                          isChecked /* && captcha */ ? <Button onClick={handleSubmit} colorScheme="orange">
                             {loader ? <Loader /> : "Register Now"}
                           </Button> : <Button isDisabled colorScheme="orange">
                             {loader ? <Loader /> : "Register Now"}
@@ -393,9 +400,9 @@ function Signup(props) {
                       {/* if already registered */}
                       <Center>
                         <Link to="/login">
-                          <Button mt="20px">
+                          <Text mt="20px">
                             Registered already? Login
-                          </Button>
+                          </Text>
                         </Link>
                       </Center>
                     </TabPanel>

@@ -13,7 +13,7 @@ import Successfullpage from '../Checkout/successfullpage';
 import { useToast } from '@chakra-ui/react';
 
 
-/* import OTPInput from "otp-input-react" */
+import OTPInput from "otp-input-react";
 import { useNavigate } from 'react-router-dom';
 
 function Checkout() {
@@ -96,26 +96,56 @@ function Checkout() {
 
 
     } else {
-      let num = Math.floor(Math.random() * 10000)
-      setpaybtn(false)
-      setgenotp(num)
 
-      toast({
-        position: 'top',
-        title: '',
-        description: `Your OTP Is ${num}`,
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      })
-      // alert("OTP Is "+ num)
-      console.log(num)
+      setcheckpage("none");
+      setotppage("none");
+      setisLoad(true)
 
-      console.log(otp)
-      setcheckpage("none")
-      setotppage("block")
+      let timeout;
 
+      function myFunction() {
+        timeout = setTimeout(alertFunc, 5000);
+
+      }
+
+      function alertFunc() {
+        setisLoad(false)
+        setsuccessfull(true)
+
+
+        function myFunction2() {
+          timeout = setTimeout(alertFunc2, 3000);
+
+        }
+        function alertFunc2() {
+          setsuccessfull(false)
+          navigate("/items")
+        }
+        myFunction2()
+
+      }
+      myFunction();
     }
+    /* let num = Math.floor(Math.random() * 10000)
+    setpaybtn(false)
+    setgenotp(num)
+
+    toast({
+      position: 'top',
+      title: '',
+      description: `Your OTP Is ${num}`,
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    })
+    alert("OTP Is "+ num)
+    console.log(num)
+
+    console.log(otp)
+    setcheckpage("none")
+    setotppage("block")
+
+  } */
   }
   let handlecrbtn = () => {
     setpaybtn(false)
@@ -142,9 +172,9 @@ function Checkout() {
           <Stack>
             <Box w="500px"> <Center> <Text pt="20px" color={"white"} fontSize="25px" fontWeight="extrabold" fontFamily="cursive" align="right">Checkout</Text> </Center></Box>
             <Box w="500px" height="600px" align="left" padding="15px" borderWidth='2px' backgroundColor="white" borderRadius='lg' overflow='hidden'>
-              <Text fontSize="18px">DELIVERY TERMS</Text>
+              {/* <Text fontSize="18px">DELIVERY TERMS</Text>
               <Checkbox size="md" iconColor="black" borderColor="black" colorScheme="yellow">Delivery</Checkbox><br />
-              <Checkbox size="md" iconColor="black" borderColor="black" colorScheme="yellow">Pickup</Checkbox><br /><br />
+              <Checkbox size="md" iconColor="black" borderColor="black" colorScheme="yellow">Pickup</Checkbox><br /><br /> */}
 
               <Box>
                 <Stack>
@@ -207,7 +237,7 @@ function Checkout() {
                   <Flex>
                     <Stack alignItems="start" >
                       <Text>VALID THRU</Text>
-                      <Input width="50%" varient="date" placeholder='05/23' onChange={(e) => setcreditcard({ ...creditCard, date: e.target.value })} />
+                      <Input width="50%" varient="date" placeholder='05/25' onChange={(e) => setcreditcard({ ...creditCard, date: e.target.value })} />
                     </Stack>
                     <Stack alignItems="start" >
                       <Text>CVV</Text>
@@ -247,9 +277,9 @@ function Checkout() {
           <Box border="1px solid white" borderRadius="30px" width="300px" height="250px" padding="50px" margin="200px 0px 0px 500px">
             <Center >
               <Stack>
-                <Text color="white">OTP has been sent to you !!!</Text><br />
+                <Text color="white">OTP has been sent to you</Text><br />
 
-                {/* <OTPInput value={otp} onChange={setotp} autoFocus OTPLength={4} otpType="number" disabled={false}  /> */}<br />br
+                <OTPInput value={otp} onChange={setotp} autoFocus OTPLength={4} otpType="number" disabled={false} /><br />
 
                 <Button onClick={checkotp}>Verify OTP</Button>
                 <Button variant='link' color='white' onClick={handleClick}>Resend OTP</Button>

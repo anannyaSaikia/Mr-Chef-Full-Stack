@@ -5,8 +5,8 @@ import { BsFillTelephonePlusFill } from "react-icons/bs";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import axios from 'axios'
-import { useDispatch } from "react-redux";
-import { fetchUserFaliure, fetchUserSuccess } from "../../Redux/loginRedux/loginActionCreater";
+/* import { useDispatch } from "react-redux";
+import { fetchUserFaliure, fetchUserSuccess } from "../../Redux/loginRedux/loginActionCreater"; */
 import { ResetPassword } from "./ResetPassword";
 import { useNavigate } from "react-router-dom";
 import background from "./images/bg2.jpg";
@@ -27,9 +27,12 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import Loader from "./Loader";
+import { Link } from 'react-router-dom';
+
 function Signin(props) {
   const toast = useToast()
-  const dispatch = useDispatch();
+  /* const dispatch = useDispatch(); */
+  
   const navigate = useNavigate()
   const [inputFocus, setInputFocus] = useState({
     field2: false,
@@ -101,12 +104,12 @@ function Signin(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /* let userDataObj = { mobile, password }; */
-    const payload = {
+    let userDataObj = { mobile, password };
+    /* const payload = {
       mobile,
       password
-    }
-    fetch("http://localhost:8000/login", {
+    } */
+    /* fetch("http://localhost:8000/login", {
       method : "POST",
       headers : {
         "Content-type" : "application/json"
@@ -143,9 +146,36 @@ function Signin(props) {
         duration: 2000,
         isClosable: true,
       });
-    })
-    /* if (isValidated()) {
-      axios.get("http://localhost:8000/users")
+    }) */
+    if (isValidated()) {
+      axios.post("http://localhost:8000/login", userDataObj)
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem("token", res.data.token);
+          toast({
+            title: "Login successful",
+            description: "You have successfully Logged in",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+          setloader(true);
+          setTimeout(() => {
+            setloader(false);
+            navigate("/items")
+          }, 2000);
+        })
+        .catch((err) => {
+          console.log(err);
+          toast({
+            title: "Login Failed",
+            description: "Failed :" + err.message,
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
+        })
+      /* axios.get("http://localhost:8000/users")
         .then((res) => {
           const filterredData = res.data.filter((data) => {
             return data.mobile === mobile && data.password === password
@@ -187,8 +217,8 @@ function Signin(props) {
             isClosable: true,
           });
           // toast.error("Failed :" + err.message);
-        });
-    } */
+        }); */
+    }
   };
 
 
@@ -218,9 +248,9 @@ function Signin(props) {
               mr="-30px"
               mt="-3px"
               p="50px">
-              <Box p="25px">
+              <Box p="10px">
                 <Center>
-                  <Heading as="p" color={"orange"} fontFamily={"cursive"} >
+                  <Heading as="p" color={"red"} fontFamily={"cursive"} >
                     Login
                   </Heading>
                 </Center>
@@ -228,7 +258,7 @@ function Signin(props) {
               </Box>
               <Box>
                 <Center>
-                  <Image my="-60px" borderRadius="full" boxSize="300px" src={logo} />
+                  <Image p="10px" my="-60px" borderRadius="full" boxSize="250px" src={logo} />
                 </Center>
               </Box>
 
@@ -300,6 +330,13 @@ function Signin(props) {
                 }
               </Center>
               <ResetPassword isOpen={isOpen} onClose={onClose} />
+              <Center>
+                <Link to="/signup">
+                  <Text mt="20px">
+                    Haven't registered? Signin
+                  </Text>
+                </Link>
+              </Center>
             </Box>
           </Center>
         </Box>

@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import SingleCategory from './SingleCategory';
 import styles from "./CategoryDetails.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Icon, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
-import { BsSearchHeartFill } from "react-icons/bs";
+/* import { Icon, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
+import { BsSearchHeartFill } from "react-icons/bs"; */
 
 import { getDataRequest, getDataSuccess, getDataFailure } from "../../Redux/actionCreator";
 
@@ -14,23 +14,28 @@ const CategoryDetails = () => {
     const { category } = useParams();
     const dispatch = useDispatch();
     const [search, setSearch] = useState("");
+    const [data, setData] = useState([]);
 
-    const data = useSelector((store) => {
+    /* const data = useSelector((store) => {
         return store.reducer.data;
-    })
+    }) */
 
     useEffect(() => {
         dispatch(getDataRequest());
         console.log(category);
-        axios.get(`http://localhost:8000/${category}`)
+        axios.get(`http://localhost:8000/items/CategoryDetails/${category}`, { headers : {
+            "Authorization" : `Bearer ${localStorage.getItem("token")}` 
+        }})
             .then((res) => {
                 dispatch(getDataSuccess(res.data));
+                console.log(res.data);
+                setData(res.data);
             })
             .catch((err) => {
                 dispatch(getDataFailure());
                 console.log(err);
             })
-    })
+    },[])
 
     return (
         <div>
