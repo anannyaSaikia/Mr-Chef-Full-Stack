@@ -10,14 +10,17 @@ import logo from "../Signin_Signup/images/w.png";
 const Navbar = () => {
   /* const [flag, setFlag] = useState(false); */
 
-  const token = localStorage.getItem("token");
-
+  let token = "";
   /* const userName = useSelector((store) => {
     return store.reducerReducer.userDetails.name
   }) */
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    if(localStorage.getItem("token")){
+      localStorage.removeItem("token");
+    }else{
+      token = localStorage.getItem("token");
+    }
     /* setFlag(false); */
     /* <Navigate  replace={true}/> */
     /* console.log("clicked") */
@@ -51,16 +54,17 @@ const Navbar = () => {
         <BsFacebook style={{ fontSize: "30px", cursor: "pointer" }} />
       </Container>
       <Box display={"flex"} justifyContent={"end"} gap={"20px"} mt="-75px" p="40px">
-        <Link to="/login">
+        
+        {/* <Link to="/login"> */}
           <Button onClick={handleLogout} color={"black"} /* colorScheme='black' */ variant='solid'>
             {/* {userName === undefined ? "Login" : `Hi ${userName}`} */}
             {/* {
             flag ? "Logout" : "Login/SignUp"
           } */}
-
           {token ? "Logout" : "Login"}
           </Button>
-        </Link>
+        {/* </Link> */}
+
         <Link to="/items/cart">
           <BsCartPlusFill style={{ fontSize: "30px", cursor: "pointer" }} />
         </Link>
