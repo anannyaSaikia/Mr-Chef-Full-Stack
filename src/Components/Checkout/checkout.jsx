@@ -176,18 +176,18 @@ function Checkout() {
               <Checkbox size="md" iconColor="black" borderColor="black" colorScheme="yellow">Delivery</Checkbox><br />
               <Checkbox size="md" iconColor="black" borderColor="black" colorScheme="yellow">Pickup</Checkbox><br /><br /> */}
 
-              <Box>
+              <Box p="25px">
                 <Stack>
                   <Text fontSize="18px">DELIVERY ADDRESS</Text>
 
-                  <Input variant='flushed' focusBorderColor='yellow.300' width="100%" placeholder="Street" />
-                  <Input variant='flushed' focusBorderColor='yellow.300' width="100%" placeholder="Landmark" />
-                  <Input variant='flushed' focusBorderColor='yellow.300' width="100%" placeholder="House" />
-                  <Flex>
+                  <Input variant='flushed' focusBorderColor='yellow.300' width="100%" placeholder="House No., Building Name" />
+                  <Input variant='flushed' focusBorderColor='yellow.300' width="100%" placeholder="Road Name, Area, Colony" />
+                  <Input variant='flushed' focusBorderColor='yellow.300' width="100%" placeholder="City" />
+                  {/* <Flex>
                     <Input variant='flushed' focusBorderColor='yellow.300' width="70%" placeholder="Entrance" />
                     <Spacer />
                     <Checkbox size="md" iconColor="black" borderColor="black" colorScheme="yellow">Private House</Checkbox>
-                  </Flex>
+                  </Flex> */}
 
                   <Input variant='flushed' focusBorderColor='yellow.300' width="100%" placeholder="Mobile" type="number" />
                   <Textarea placeholder='Comment to the Order' focusBorderColor='yellow.300' />
@@ -200,7 +200,7 @@ function Checkout() {
                 <Center>
                   <Stack>
                     <img width="50px" className={styles.creditCard} src="https://cutewallpaper.org/24/credit-card-icon-png/card-clipart-payment-card-credit-card-icon-png-white-transparent-png-226663-pinclipart.png" alt="creditcard"></img>
-                    <Text color="black" fontSize="11px">Credit Card</Text>
+                    <Text color="black" fontSize="11px">Card Payment</Text>
                   </Stack>
                 </Center>
               </Button>
@@ -212,7 +212,7 @@ function Checkout() {
                   <Stack>
 
                     <img width="30px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTetjh5NS8Lq3poSJB9aeTHUVW-jVpUa-LMadaQvxqv8w&usqp=CAU&ec=48600113" alt=""></img>
-                    <Text color="black" fontSize="11px">Cash</Text>
+                    <Text color="black" fontSize="11px">Cash On Delivery</Text>
 
                   </Stack>
                 </Center>

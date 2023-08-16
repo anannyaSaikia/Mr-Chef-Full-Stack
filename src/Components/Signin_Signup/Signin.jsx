@@ -162,7 +162,7 @@ function Signin(props) {
           setloader(true);
           setTimeout(() => {
             setloader(false);
-            navigate("/items")
+            navigate("/items/menu")
           }, 2000);
         })
         .catch((err) => {

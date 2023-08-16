@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import SingleCategory from './SingleCategory';
 import styles from "./CategoryDetails.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 /* import { Icon, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { BsSearchHeartFill } from "react-icons/bs"; */
 
@@ -23,7 +23,13 @@ const CategoryDetails = () => {
     useEffect(() => {
         dispatch(getDataRequest());
         console.log(category);
-        axios.get(`http://localhost:8000/items/CategoryDetails/${category}`, { headers : {
+
+        let url = "";
+        
+        if(search === "") url = `http://localhost:8000/items/CategoryDetails/${category}`
+        else url = `http://localhost:8000/items/CategoryDetails/${category}?q=${search}`
+
+        axios.get(url , { headers : {
             "Authorization" : `Bearer ${localStorage.getItem("token")}` 
         }})
             .then((res) => {
@@ -35,7 +41,7 @@ const CategoryDetails = () => {
                 dispatch(getDataFailure());
                 console.log(err);
             })
-    },[])
+    },[search, category])
 
     return (
         <div>
@@ -44,11 +50,12 @@ const CategoryDetails = () => {
             </div>
             <div className={styles.items}>
                 {
-                    data.length > 0 && data.filter((item) => {
+                    /* data.length > 0 && data.filter((item) => {
                         return search.toLowerCase() === ""
                             ? item
                             : item.name.toLowerCase().includes(search)
-                    }).map((ele, i) => {
+                    }) */
+                    data?.map((ele, i) => {
                         return (
                             <SingleCategory key={i}
                                 id={ele.id}

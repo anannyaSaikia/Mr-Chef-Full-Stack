@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       {/* <Navbar position={"sticky"}/> */}
       <CombinedNavbar/>
-      <AllRoute/>
+      <AllRoute />
       <Footer/>
       {/* <MobNavbar/> */}
 

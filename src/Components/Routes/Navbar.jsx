@@ -6,21 +6,29 @@ import logo from "../Signin_Signup/images/w.png";
 /* import { useSelector } from 'react-redux'; */
 
 /* import { Navigate } from 'react-router-dom'; */
-
+import { useNavigate } from 'react-router-dom';
+/* import style from './Navbar.module.css'; */
 const Navbar = () => {
   /* const [flag, setFlag] = useState(false); */
 
-  let token = "";
+  const navigate = useNavigate();
+  /* let token = ""; */
   /* const userName = useSelector((store) => {
     return store.reducerReducer.userDetails.name
   }) */
 
+  let token = localStorage.getItem("token");
+
   const handleLogout = () => {
-    if(localStorage.getItem("token")){
-      localStorage.removeItem("token");
+    token="";
+    navigate("/login");
+    /* if(localStorage.getItem("token")){
+      token = ""
+      navigate("/login")
     }else{
       token = localStorage.getItem("token");
-    }
+      navigate("/items");
+    } */
     /* setFlag(false); */
     /* <Navigate  replace={true}/> */
     /* console.log("clicked") */
@@ -33,7 +41,7 @@ const Navbar = () => {
   }, []) */
 
   return (
-    <Box h={"85px"} backgroundColor={"yellow.400"}>
+    <Box h={"85px"} backgroundColor={"yellow.400"} >
       <Link to="/items">
         <Image borderRadius='full' boxSize={"100px"} src={logo} />
       </Link>
@@ -56,12 +64,12 @@ const Navbar = () => {
       <Box display={"flex"} justifyContent={"end"} gap={"20px"} mt="-75px" p="40px">
         
         {/* <Link to="/login"> */}
-          <Button onClick={handleLogout} color={"black"} /* colorScheme='black' */ variant='solid'>
+          <Button onClick={handleLogout} color={"black"} /* colorScheme='black' */ variant='solid'>Login
             {/* {userName === undefined ? "Login" : `Hi ${userName}`} */}
             {/* {
             flag ? "Logout" : "Login/SignUp"
           } */}
-          {token ? "Logout" : "Login"}
+          {/* {token === "" ? "Login" : "Logout"} */}
           </Button>
         {/* </Link> */}
 

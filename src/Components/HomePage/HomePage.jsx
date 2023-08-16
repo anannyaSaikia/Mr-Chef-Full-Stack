@@ -8,11 +8,11 @@ import backimg from "./back.jpg"
 
 function HomePage() {
   return (
-    <div>  
-    <div  className='banner'> 
+    <div >  
+    <div  className='banner' style={{marginTop : "0px"}}> 
     {/* style={{position:"relative"}} */}
 
-       <img  style={{width:"100%"}} src={backimg} />
+       <img  style={{width:"100%"}} src={backimg} alt="" />
         <div style={{position:"absolute",top:"30px"}}>
           <div style={{marginLeft:"70px", paddingTop:"400px"}}> 
             <h2 style={{color:"white",fontWeight:"bold",fontSize:"65px"}} > Sizzlin' Stack</h2>

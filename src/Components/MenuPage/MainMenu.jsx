@@ -36,7 +36,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/pizza'>
+                <Link to='/items/CategoryDetails/Pizza'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/6416559/pexels-photo-6416559.jpeg?auto=compress&cs=tinysrgb&w=600" alt="shawarma" />
                         <div className={styles.centerIcon}>
@@ -48,7 +48,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/streetFood'>
+                <Link to='/items/CategoryDetails/Street Food'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/2204769/pexels-photo-2204769.jpeg?auto=compress&cs=tinysrgb&w=600" alt="street_food" />
                         <div className={styles.centerIcon}>
@@ -60,7 +60,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/pizza'>
+                <Link to='/items/CategoryDetails/Pizza'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/13814644/pexels-photo-13814644.jpeg?auto=compress&cs=tinysrgb&w=600" alt="pizza" />
                         <div className={styles.centerIcon}>
@@ -84,7 +84,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/pizza'>
+                <Link to='/items/CategoryDetails/Pizza'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/1441122/pexels-photo-1441122.jpeg?auto=compress&cs=tinysrgb&w=600" alt="drinks" />
                         <div className={styles.centerIcon}>
@@ -108,7 +108,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/pizza'>
+                <Link to='/items/CategoryDetails/Pizza'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/1435896/pexels-photo-1435896.jpeg?auto=compress&cs=tinysrgb&w=600" alt="italian" />
                         <div className={styles.centerIcon}>
@@ -120,7 +120,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/streetFood'>
+                <Link to='/items/CategoryDetails/Street Food'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&w=600" alt="chinese" />
                         <div className={styles.centerIcon}>
@@ -132,7 +132,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/pizza'>
+                <Link to='/items/CategoryDetails/Pizza'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600" alt="south-indian" />
                         <div className={styles.centerIcon}>
@@ -144,7 +144,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/streetFood'>
+                <Link to='/items/CategoryDetails/Street Food'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=600" alt="north-indian" />
                         <div className={styles.centerIcon}>
@@ -156,7 +156,7 @@ const MainMenu = () => {
                     </div>
                 </Link>
 
-                <Link to='/items/CategoryDetails/pizza'>
+                <Link to='/items/CategoryDetails/Pizza'>
                     <div className={styles.container}>
                         <img className={styles.img} src="https://images.pexels.com/photos/2230540/pexels-photo-2230540.jpeg?auto=compress&cs=tinysrgb&w=600" alt="continental" />
                         <div className={styles.centerIcon}>
