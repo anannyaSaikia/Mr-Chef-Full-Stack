@@ -119,7 +119,7 @@ function Checkout() {
         }
         function alertFunc2() {
           setsuccessfull(false)
-          navigate("/items")
+          navigate("/items/menu")
         }
         myFunction2()
 

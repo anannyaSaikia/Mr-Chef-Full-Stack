@@ -41,7 +41,7 @@ const Navbar = () => {
   }, []) */
 
   return (
-    <Box h={"85px"} backgroundColor={"yellow.400"} >
+    <Box h={"85px"} backgroundColor={"yellow.400"} /* className={style.navbar} */>
       <Link to="/items">
         <Image borderRadius='full' boxSize={"100px"} src={logo} />
       </Link>
